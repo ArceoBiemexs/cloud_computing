@@ -7,7 +7,7 @@ st.set_page_config(page_title="Los Camones", page_icon=":meat_on_bone:", layout=
 # Cargar imagenes
 logo = Image.open("logo_los_camones.png")
 carnitas = Image.open("carnitas.png")
- 
+
 # Encabezado
 st.image(logo, width=200)
 st.title("Restaurante de Carnitas Los Camones")
