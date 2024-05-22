@@ -21,7 +21,7 @@ Ofrecemos una experiencia gastronómica única con ingredientes frescos y un amb
 
 # Mostrar imagen de carnitas
 if carnitas:
-    st.image(carnitas, caption="Nuestras famosas carnitas", width=100, height=300)  # Ajusta el ancho a 300 píxeles
+    st.image(carnitas, caption="Nuestras famosas carnitas", width=100)  # Ajusta el ancho a 300 píxeles
 
 #st.image(carnitas, caption="Nuestras famosas carnitas", use_column_width=True)
 
