@@ -1,86 +1,32 @@
 import streamlit as st
-from PIL import Image
 
 # Configurar la página
-st.set_page_config(page_title="Los Camones", page_icon=":meat_on_bone:", layout="wide")
+st.set_page_config(page_title="Frecuencias de Transmisor Rhode", page_icon=":satellite:", layout="centered")
 
-# Cargar imagenes
-logo = Image.open("cochino.jpg")
-carnitas = Image.open("carnitas.png")
+st.title("Transmisor Rhode: Frecuencias de Operación")
 
-# Encabezado
-st.image(logo, width=200)
-st.title("Restaurante de Carnitas Los Camones")
-st.subheader("¡Bienvenidos a Los Camones! Disfruta de las mejores carnitas de la ciudad.")
-
-# Descripción
-st.markdown("""
-Los Camones es un restaurante familiar especializado en la preparación de deliciosas carnitas. 
-Ofrecemos una experiencia gastronómica única con ingredientes frescos y un ambiente acogedor.
-""")
-
-# Mostrar imagen de carnitas
-if carnitas:
-    st.image(carnitas, caption="Nuestras famosas carnitas", width=100)  # Ajusta el ancho a 300 píxeles
-
-#st.image(carnitas, caption="Nuestras famosas carnitas", use_column_width=True)
-
-# Menú del restaurante
-st.header("Menú")
-menu_items = {
-    "Taco de Carnitas": 20,
-    "Torta de Carnitas": 35,
-    "Quesadilla de Carnitas": 25,
-    "Orden de Carnitas (1kg)": 200,
-    "Refresco": 15,
-    "Cerveza": 30
+# Información de canales y frecuencias
+channels = {
+    "Canal 1": 485,
+    "Canal 2": 491,
+    "Canal 3": 545
 }
 
-# Mostrar el menú
-for item, price in menu_items.items():
-    st.write(f"**{item}**: ${price} MXN")
+# Mostrar la información de los canales
+st.header("Frecuencias de los Canales")
+for channel, frequency in channels.items():
+    st.write(f"**{channel}**: {frequency} MHz")
 
-# Selección de platillos
-st.header("Haz tu pedido")
-selected_items = st.multiselect("Selecciona tus platillos:", options=list(menu_items.keys()))
+# Entrada de usuario para actualizar la frecuencia de un canal
+st.header("Actualizar Frecuencia de un Canal")
+channel_to_update = st.selectbox("Selecciona el canal a actualizar:", list(channels.keys()))
+new_frequency = st.number_input(f"Introduce la nueva frecuencia para {channel_to_update} (MHz):", min_value=1, max_value=1000)
 
-# Calcular total
-if selected_items:
-    total = sum(menu_items[item] for item in selected_items)
-    st.write(f"Total a pagar: **${total} MXN**")
+if st.button("Actualizar Frecuencia"):
+    channels[channel_to_update] = new_frequency
+    st.write(f"Frecuencia de **{channel_to_update}** actualizada a {new_frequency} MHz")
 
-# Información de contacto
-st.header("Contacto")
-with st.form("contact_form"):
-    name = st.text_input("Nombre:")
-    email = st.text_input("Correo electrónico:")
-    message = st.text_area("Mensaje:")
-    submitted = st.form_submit_button("Enviar")
-
-    if submitted:
-        st.write("¡Gracias por contactarnos! Nos pondremos en contacto contigo pronto.")
-
-# Opiniones de clientes
-st.header("Opiniones de Clientes")
-st.text_area("Deja tu opinión:")
-
-# Mostrar opiniones (ejemplo)
-st.write("**Juan Pérez**: Las mejores carnitas que he probado. ¡Recomendado!")
-st.write("**Ana López**: Excelente servicio y comida deliciosa.")
-
-# Mapa de ubicación
-st.header("Ubicación")
-st.map()
-
-# Redes sociales
-st.header("Síguenos en redes sociales")
-st.write("[Facebook](https://www.facebook.com/LosCamones)")
-st.write("[Instagram](https://www.instagram.com/LosCamones)")
-
-# Pie de página
-st.markdown("""
-**Los Camones** \n
-Dirección: Av. Carnitas 123, Ciudad, País \n
-Teléfono: (123) 456-7890 \n
-Correo: contacto@loscamones.com
-""")
+# Mostrar las frecuencias actualizadas
+st.header("Frecuencias Actualizadas de los Canales")
+for channel, frequency in channels.items():
+    st.write(f"**{channel}**: {frequency} MHz")
