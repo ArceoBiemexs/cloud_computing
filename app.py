@@ -5,7 +5,7 @@ from PIL import Image
 st.set_page_config(page_title="Los Camones", page_icon=":meat_on_bone:", layout="wide")
 
 # Cargar imagenes
-logo = Image.open("logo_los_camones.png")
+logo = Image.open("cochino.png")
 carnitas = Image.open("carnitas.png")
 
 # Encabezado
